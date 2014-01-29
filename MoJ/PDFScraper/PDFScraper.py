@@ -9,7 +9,7 @@ from pdfminer.pdfpage import PDFPage
 from pdfminer.converter import XMLConverter, HTMLConverter, TextConverter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.cmapdb import CMapDB
-from pdfminer.layout import LAParams
+from pdfminer.layout import LAParams, LTTextBox
 from pdfminer.image import ImageWriter
 
 """from pdfminer.pdfparser import PDFParser
@@ -50,4 +50,5 @@ for page in PDFPage.create_pages(document):
     layout = device.get_result()
     ### PRINT FOR TESTING ###
     for obj in layout:
-        print obj
+        if isinstance( obj, LTTextBox ):
+            print obj.get_text().encode('utf-8')
