@@ -51,4 +51,8 @@ for page in PDFPage.create_pages(document):
     ### PRINT FOR TESTING ###
     for obj in layout:
         if isinstance( obj, LTTextBoxHorizontal ):
-            print obj.get_text().encode('utf-8')
+            out = obj.get_text().encode('utf-8')
+            if not out.isdigit():
+                print out.decode('utf-8')[::-1].encode('utf-8')
+            else:
+                print out
